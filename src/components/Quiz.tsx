@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { quizContext } from "../context/quizContext";
 import { AnswerType, QuizType, ResultType } from "../types/quiz";
+import Loader from "./Loader";
 import QuizQuestion from "./QuizQuestion";
 
 const Quiz = () => {
@@ -13,20 +14,30 @@ const Quiz = () => {
   const [answer, setAnswer] = useState<AnswerType>({} as AnswerType);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState<ResultType>({ fullMarks: 0, marks: 0 });
+  const [loading, setLoading] = useState(false);
 
+  // get scores from vercel's serverless function
   const handleQuizSubmit = async () => {
-    const res = await axios({
-      method: "post",
-      url: "/api/checkScore",
-      data: {
-        quiz: answer,
-      },
-    });
-    console.log(res.data);
-    setShowResult(true);
-    setResult(res.data);
+    setLoading(true);
+    try {
+      const res = await axios({
+        method: "post",
+        url: "/api/checkScore",
+        data: {
+          quiz: answer,
+        },
+      });
+      console.log(res.data);
+      setLoading(false);
+      setShowResult(true);
+      setResult(res.data);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
 
+  // needed in line 53
   const newOptionSet = {
     option1: false,
     option2: false,
@@ -34,6 +45,8 @@ const Quiz = () => {
     option4: false,
   };
 
+  // when a radio button is clicked to select an answer
+  // update the answer according to the questions id (qid)
   const updateAnswer = (qid: string, option: string) => {
     setAnswer((prev) => ({
       ...prev,
@@ -57,12 +70,7 @@ const Quiz = () => {
         questions: {} as any,
       };
       qz.questions.forEach((ques) => {
-        ans.questions[ques.id] = {
-          option1: false,
-          option2: false,
-          option3: false,
-          option4: false,
-        };
+        ans.questions[ques.id] = newOptionSet;
       });
       setAnswer(ans);
     }
@@ -72,15 +80,26 @@ const Quiz = () => {
       <main className="w-full h-full p-4 rounded-md white-glassmorphism">
         <h2 className="text-xl md:text-2xl font-bold mb-6">{quiz?.title}</h2>
         <div className="">
-          {quiz?.questions?.map((q) => (
-            <QuizQuestion key={q.id} question={q} updateAnswer={updateAnswer} />
-          ))}
+          {quiz?.questions?.length ? (
+            quiz?.questions?.map((q) => (
+              <QuizQuestion
+                key={q.id}
+                question={q}
+                updateAnswer={updateAnswer}
+              />
+            ))
+          ) : (
+            <div className="w-full h-full p-4 flex justify-center items-center">
+              <Loader />
+            </div>
+          )}
         </div>
         <button
           onClick={handleQuizSubmit}
-          className="block mx-auto bg-blue-700 py-4 px-8 text-base text-white rounded-md shadow-md hover:bg-blue-600 mt-6"
+          className="flex mx-auto bg-blue-700 py-4 px-8 text-base text-white rounded-md shadow-md hover:bg-blue-600 mt-6"
         >
-          Submit
+          <span className="mr-3">Submit</span>
+          {loading && <Loader />}
         </button>
       </main>
       {showResult && (

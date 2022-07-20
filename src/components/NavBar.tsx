@@ -25,7 +25,7 @@ const Navbar = () => {
         <div>
           <GiHamburgerMenu size={30} />
         </div>
-        <ul className="hidden group-hover:block absolute bg-white rounded-md shadow-md text-slate-700 overflow-hidden -bottom-36 -left-24 m-0">
+        <ul className="hidden group-hover:block absolute bg-white rounded-md shadow-md text-slate-700 overflow-hidden -bottom-30 -left-24 m-0">
           <Link to="/quizzes">
             <li className="py-3 pl-2 w-32 hover:bg-slate-700 hover:text-slate-100 transition-all duration-300 ease-in-out">
               Quizzes

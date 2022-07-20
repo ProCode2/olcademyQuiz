@@ -30,7 +30,6 @@ export const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
         title,
       };
     });
-    console.log(qzs);
 
     setQuizState && setQuizState((prev) => ({ ...prev, quizzes: qzs }));
   };
