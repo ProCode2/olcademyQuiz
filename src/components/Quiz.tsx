@@ -14,7 +14,7 @@ const Quiz = () => {
   const handleQuizSubmit = async () => {
     const res = await axios({
       method: "get",
-      url: "/api/checkscore",
+      url: "/api/checkScore",
       data: {
         quiz: answer,
       },
