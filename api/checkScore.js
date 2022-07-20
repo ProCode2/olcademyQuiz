@@ -28,7 +28,6 @@ export default async function handler(request, response) {
   const answer = await getDocs(
     query(collection(db, "answers"), where("quizId", "==", quiz.quizId))
   );
-  console.log(answer.docs);
   if (answer.empty) return response.send("Invalid Answers");
   let answerKey = { ...answer.docs[0].data(), id: answer.docs[0].id };
 
@@ -39,7 +38,10 @@ export default async function handler(request, response) {
     fullMarks += 1;
     let marksForCurrentQuestion = 1;
     for (let i = 1; i < 5; i++) {
-      if (answerKey.questions[qid][`option${i}`] != quiz[qid][`option${i}`]) {
+      if (
+        answerKey.questions[qid][`option${i}`] !=
+        quiz.questions[qid][`option${i}`]
+      ) {
         marksForCurrentQuestion = 0;
       }
     }
