@@ -36,3 +36,8 @@ export interface AnswerType {
     };
   };
 }
+
+export interface ResultType {
+  marks: number;
+  fullmarks: number;
+}
