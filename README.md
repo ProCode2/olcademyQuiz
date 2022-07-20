@@ -30,3 +30,5 @@ yarn install
 ```bash
 yarn dev
 ```
+
+`Note`: The serverless function only works when deployed with vercel, try the working demo [here](https://olcademy-quiz.vercel.app)
