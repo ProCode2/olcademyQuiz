@@ -1,4 +1,10 @@
 export interface Quiz {
+  title: string;
+  tags: string[];
+  questions: QuizItem[];
+}
+
+export interface QuizItem {
   question: string;
   multipleCorrect: boolean;
   option1: string;

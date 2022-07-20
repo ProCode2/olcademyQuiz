@@ -6,7 +6,7 @@ import Quizzes from "./components/Quizzes";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App text-white gradient-bg-hero">
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
