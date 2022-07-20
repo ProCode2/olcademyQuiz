@@ -12,7 +12,7 @@ const Quiz = () => {
   const [quiz, setQuiz] = useState<QuizType>({} as QuizType);
   const [answer, setAnswer] = useState<AnswerType>({} as AnswerType);
   const [showResult, setShowResult] = useState(false);
-  const [result, setResult] = useState<ResultType>({ fullmarks: 0, marks: 0 });
+  const [result, setResult] = useState<ResultType>({ fullMarks: 0, marks: 0 });
 
   const handleQuizSubmit = async () => {
     const res = await axios({
@@ -94,7 +94,7 @@ const Quiz = () => {
             </h3>
             <div className="w-32 h-32 border-4 border-green-600 rounded-full flex flex-col justify-center items-center font-bold text-xl bg-slate-800 text-white divide-y-4 divide-white">
               <span className="w-full text-center">{result.marks}</span>
-              <span className="w-full text-center">{result.fullmarks}</span>
+              <span className="w-full text-center">{result.fullMarks}</span>
             </div>
             <Link to="/quizzes">
               <button className="block mx-auto bg-blue-700 py-4 px-8 text-base text-white rounded-md shadow-md hover:bg-blue-600 mt-6">
