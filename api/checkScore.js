@@ -23,12 +23,14 @@ const db = getFirestore(app);
 
 export default async function handler(request, response) {
   const { quiz } = request.body;
-  if (!quiz?.quizId) response.status(400).send("quizId is required");
+  console.log(request.body);
+  if (!quiz?.quizId) return response.status(400).send("quizId is required");
   const answer = await getDocs(
     query(collection(db, "answers"), where("quizId", "==", quiz.quizId))
   );
-  if (answer.empty) response.send("Invalid Answers");
-  let answerKey = { ...answer[0].data(), id: answer[0].id };
+  console.log(answer.docs);
+  if (answer.empty) return response.send("Invalid Answers");
+  let answerKey = { ...answer.docs[0].data(), id: answer.docs[0].id };
 
   let marks = 0;
   let fullMarks = 0;
@@ -44,5 +46,5 @@ export default async function handler(request, response) {
     marks += marksForCurrentQuestion;
   });
 
-  response.json({ marks, fullMarks });
+  return response.json({ marks, fullMarks });
 }

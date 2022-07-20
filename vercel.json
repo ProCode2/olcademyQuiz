@@ -5,7 +5,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/quiz",
+      "source": "/quiz/*",
       "destination": "/index.html"
     },
     {
