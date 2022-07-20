@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { quizContext } from "../context/quizContext";
@@ -9,6 +10,17 @@ const Quiz = () => {
   const { quizState } = useContext(quizContext);
   const [quiz, setQuiz] = useState<QuizType>({} as QuizType);
   const [answer, setAnswer] = useState<AnswerType>({} as AnswerType);
+
+  const handleQuizSubmit = async () => {
+    const res = await axios({
+      method: "get",
+      url: "/api/checkscore",
+      data: {
+        quiz: answer,
+      },
+    });
+    console.log(res.data);
+  };
 
   const newOptionSet = {
     option1: false,
@@ -60,7 +72,7 @@ const Quiz = () => {
           ))}
         </div>
         <button
-          onClick={() => console.log(answer)}
+          onClick={handleQuizSubmit}
           className="block mx-auto bg-blue-700 py-4 px-8 text-base text-white rounded-md shadow-md hover:bg-blue-600 mt-6"
         >
           Submit
