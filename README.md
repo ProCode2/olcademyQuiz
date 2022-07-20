@@ -31,4 +31,11 @@ yarn install
 yarn dev
 ```
 
-`Note`: The serverless function only works when deployed with vercel, try the working demo [here](https://olcademy-quiz.vercel.app)
+`Note: The serverless function only works when deployed with vercel, try the working demo [here](https://olcademy-quiz.vercel.app)`
+
+# Screenshots
+![screenshot 1](https://raw.githubusercontent.com/ProCode2/olcademyQuiz/main/screenshots/ss1.png)
+![screenshot 2](https://raw.githubusercontent.com/ProCode2/olcademyQuiz/main/screenshots/ss2.png)
+![screenshot 3](https://raw.githubusercontent.com/ProCode2/olcademyQuiz/main/screenshots/ss3.png)
+![screenshot 4](https://raw.githubusercontent.com/ProCode2/olcademyQuiz/main/screenshots/ss4.png)
+![screenshot 5](https://raw.githubusercontent.com/ProCode2/olcademyQuiz/main/screenshots/ss5.png)
