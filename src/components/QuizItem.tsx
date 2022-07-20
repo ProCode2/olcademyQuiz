@@ -1,7 +1,7 @@
 import React from "react";
-import { Quiz } from "../types/quiz";
+import { QuizType } from "../types/quiz";
 
-const QuizItem: React.FC<{ quiz: Quiz }> = ({ quiz }) => {
+const QuizItem: React.FC<{ quiz: QuizType }> = ({ quiz }) => {
   return (
     <div className="blue-glassmorphism p-2 m-4 rounded-md flex flex-col w-64 h-64 justify-center items-center">
       <div className="w-full h-32 bg-gray-700 rounded-md px-2 mb-2"></div>
