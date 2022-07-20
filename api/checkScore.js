@@ -12,7 +12,7 @@ import { initializeApp } from "firebase/app";
 
 import {
   collection,
-  getDoc,
+  getDocs,
   getFirestore,
   query,
   where,
@@ -24,10 +24,11 @@ const db = getFirestore(app);
 export default async function handler(request, response) {
   const { quiz } = request.body;
   if (!quiz?.quizId) response.status(400).send("quizId is required");
-  const answer = await getDoc(
+  const answer = await getDocs(
     query(collection(db, "answers"), where("quizId", "==", quiz.quizId))
   );
-  let answerKey = { ...answer.data(), id: answer.id };
+  if (answer.empty) response.send("Invalid Answers");
+  let answerKey = { ...answer[0].data(), id: answer[0].id };
 
   let marks = 0;
   let fullMarks = 0;
