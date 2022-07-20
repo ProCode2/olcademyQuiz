@@ -1,7 +1,15 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/quizzes",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/quiz",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
       "destination": "/index.html"
     }
   ]
